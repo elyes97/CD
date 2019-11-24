@@ -1,7 +1,7 @@
 pipeline {
   environment {
     registry = "elyes97/cd"
-    registryCredential = 'dockerhub1'
+    registryCredential = 'dockerhub12'
     dockerImage = ''
   }
  agent any
@@ -11,6 +11,12 @@ pipeline {
         git 'https://github.com/elyes97/CD.git'
       }
     }
+            stage('Build') {
+            steps {
+	    bat label: '', script: 'mvn install'
+                echo 'Building..'
+            }
+        }
     stage('Building image') {
       steps{
         script {
@@ -18,7 +24,7 @@ pipeline {
         }
       }
     }
-    stage('Deploy Image') {
+    stage('Deploy Image In dockerhub') {
   steps{
     script {
       docker.withRegistry( '', registryCredential ) {
