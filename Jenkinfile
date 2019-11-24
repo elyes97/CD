@@ -1,33 +1,24 @@
 pipeline {
-   agent any
-
-    stages {
-        stage('Chekout') {
-            steps {
-        echo 'Building..'        
-	}  
-	}
-        stage('Build') {
-            steps {
-
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-
-                echo 'Testing..'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+  environment {
+    registry = "elyes97/cd"
+    registryCredential = 'dockerhub'
+  }
+ agent any
+  stages {
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/elyes97/CD.git'
+      }
     }
+    stage('Building image') {
+      steps{
+        script {
+          docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+  }
 }
-
 
 
         
