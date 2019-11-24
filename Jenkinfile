@@ -11,12 +11,7 @@ pipeline {
         git 'https://github.com/elyes97/CD.git'
       }
     }
-            stage('Build') {
-            steps {
-	    sh label: '', script: 'mvn install'
-                echo 'Building..'
-            }
-        }
+
     stage('Building image') {
       steps{
         script {
