@@ -10,21 +10,21 @@ pipeline {
   stage('clean') 
   {
     steps {
-     sh label: '', script: '${MvnHome}/bin/mvn clean' 
+     sh label: '', script: 'mvn clean' 
 	}	  
   }
   stage('package') 
   {
 	steps {
 
-         sh label: '', script: '${MvnHome}/bin/mvn package'     
+         sh label: '', script: 'mvn package'     
 	}	  
   }
   stage('create docker image') 
   {
 	steps {
 
-          sh label: '', script: '${MvnHome}/bin/mvn clean install'   
+          sh label: '', script: 'mvn clean install'   
 	  }    
  }
     
