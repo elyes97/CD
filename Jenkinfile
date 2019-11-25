@@ -10,19 +10,22 @@ pipeline {
   stage('clean') 
   {
     steps {
-     sh label: '', script: 'mvn clean' 
+    def MvnHome = tool name: 'Maven', type: 'maven'
+     sh label: '', script: '${MvnHome}/bin/mvn clean' 
 		  }
   }
   stage('package') 
   {
 	steps {
-         sh label: '', script: 'mvn package'     
+	def MvnHome = tool name: 'Maven', type: 'maven'
+         sh label: '', script: '${MvnHome}/bin/mvn package'     
 		  }
   }
   stage('create docker image') 
   {
 	steps {
-          sh label: '', script: 'mvn clean install'   
+	def MvnHome = tool name: 'Maven', type: 'maven'
+          sh label: '', script: '${MvnHome}/bin/mvn clean install'   
 	      }
  }
     
