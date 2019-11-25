@@ -3,7 +3,7 @@ pipeline {
     registry = "elyes97/cd"
     registryCredential = 'dockerhub12'
     dockerImage = ''
-    MvnHome = 'tool name: 'Maven', type: 'maven''
+    MvnHome = 'tool name: 'Maven', type: 'maven'
   }
   agent any
   stages 
