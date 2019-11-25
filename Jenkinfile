@@ -10,19 +10,19 @@ pipeline {
   stage('clean') 
   {
     steps {
-     sh label: '', script: 'mvn clean' #clean maven project
+     sh label: '', script: 'mvn clean' 
 		  }
   }
   stage('package') 
   {
 	steps {
-         sh label: '', script: 'mvn package'     #package maven project
+         sh label: '', script: 'mvn package'     
 		  }
   }
   stage('create docker image') 
   {
 	steps {
-          sh label: '', script: 'mvn clean install'   #create docker image with maven plugin and deploy image on dockerhub
+          sh label: '', script: 'mvn clean install'   
 	      }
  }
     
