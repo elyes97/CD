@@ -3,31 +3,32 @@ pipeline {
     registry = "elyes97/cd"
     registryCredential = 'dockerhub12'
     dockerImage = ''
-    MvnHome = ' tool name: 'Maven', type: 'maven' '
   }
   agent any
   stages 
   {
   stage('clean') 
   {
-    steps {
-     
+    
+     def mvnHome = tool name: 'Maven', type: 'maven'
      sh label: '', script: '${MvnHome}/bin/mvn clean' 
-		  }
+		  
   }
   stage('package') 
   {
-	steps {
-	 
+	
+	      def mvnHome = tool name: 'Maven', type: 'maven'
+
          sh label: '', script: '${MvnHome}/bin/mvn package'     
-		  }
+		  
   }
   stage('create docker image') 
   {
-	steps {
-	 
+	
+	      def mvnHome = tool name: 'Maven', type: 'maven'
+
           sh label: '', script: '${MvnHome}/bin/mvn clean install'   
-	      }
+	      
  }
     
 
