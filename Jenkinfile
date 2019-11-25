@@ -4,32 +4,30 @@ pipeline {
     registryCredential = 'dockerhub12'
     dockerImage = ''
   }
- agent any
-  stages {
-    stage('Cloning Git') {
-      steps {
-        git 'https://github.com/elyes97/CD.git'
-      }
-    }
+  agent any
+  stages 
+  {
+  stage('clean') 
+  {
+    steps {
+     sh label: '', script: 'mvn clean' #clean maven project
+		  }
+  }
+  stage('package') 
+  {
+	steps {
+         sh label: '', script: 'mvn package'     #package maven project
+		  }
+  }
+  stage('create docker image') 
+  {
+	steps {
+          sh label: '', script: 'mvn clean install'   #create docker image with maven plugin and deploy image on dockerhub
+	      }
+ }
+    
 
-    stage('Building image') {
-      steps{
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        }
-      }
-    }
-    stage('Deploy Image In dockerhub') {
-  steps{
-    script {
-      docker.withRegistry( '', registryCredential ) {
-        dockerImage.push()
-      }
-    }
+    
   }
 }
-  }
-}
 
-
-        
