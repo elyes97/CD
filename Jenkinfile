@@ -10,7 +10,8 @@ pipeline {
   stage('clean') 
   {
     steps {
-     sh label: '', script: 'mvn clean' 
+    def mnnHome = tool name: 'Maven', type: 'maven'
+     sh label: '', script: '{$mvnHome}/bin/mvn clean' 
 	}	  
   }
   stage('package') 
